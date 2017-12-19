@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 26
     defaultConfig {
-        applicationId "com.example.calum.track_calum"
+        applicationId "com.example.calum.tracker"
         minSdkVersion 21
         targetSdkVersion 26
         versionCode 1

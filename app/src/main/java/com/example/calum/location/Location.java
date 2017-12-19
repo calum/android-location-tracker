@@ -3,7 +3,7 @@ package com.example.calum.location;
 
 import android.app.Activity;
 
-import com.example.calum.track_calum.SettingsActivity;
+import com.example.calum.tracker.SettingsActivity;
 import com.yayandroid.locationmanager.LocationManager;
 import com.yayandroid.locationmanager.configuration.Configurations;
 import com.yayandroid.locationmanager.configuration.LocationConfiguration;

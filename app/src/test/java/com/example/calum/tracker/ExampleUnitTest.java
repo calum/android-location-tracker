@@ -1,4 +1,4 @@
-package com.example.calum.track_calum;
+package com.example.calum.tracker;
 
 import org.junit.Test;
 
