@@ -5,8 +5,6 @@ import android.util.Log;
 
 import com.github.kevinsawicki.http.HttpRequest;
 
-import org.json.JSONObject;
-
 /**
  * Created by calum on 16/12/17.
  */
@@ -34,13 +32,13 @@ public class HTTP {
         return data;
     }
 
-    public class Post extends AsyncTask<String, Void, HttpRequest> {
+    public class Post extends AsyncTask<String, Void, String> {
 
-        protected HttpRequest doInBackground(String... data) {
+        protected String doInBackground(String... data) {
             Log.d(TAG, "Posting data: " +data[0]);
 
             HttpRequest request = HttpRequest.post(url);
-            request.header("User-Agent", "Calum's App");
+            request.header("User-Agent", "Tracker App");
 
             //Accept all certificates
             request.trustAllCerts();
@@ -49,11 +47,11 @@ public class HTTP {
 
             request.send(data[0]);
 
-            return request;
+            return request.body();
         }
 
-        protected void onPostExecute(HttpRequest result) {
-            Log.d(TAG,"HTTP POST Response: " + result.body());
+        protected void onPostExecute(String result) {
+            Log.d(TAG,"HTTP POST Response: " + result);
         }
 
     }

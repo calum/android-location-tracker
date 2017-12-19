@@ -1,7 +1,7 @@
 package com.example.calum.tracker;
 
+import android.app.Activity;
 import android.content.Intent;
-import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -12,9 +12,6 @@ import android.util.Log;
 import com.example.calum.location.Location;
 import com.example.calum.location.PostLocationService;
 import com.example.calum.utils.HTTP;
-import com.yayandroid.locationmanager.listener.LocationListener;
-
-import org.json.JSONObject;
 
 public class SettingsActivity extends FragmentActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
 
@@ -43,62 +40,14 @@ public class SettingsActivity extends FragmentActivity implements SharedPreferen
 
         Log.i(TAG, "Started the preference screen!");
 
-        // setup the location service
-        locationService = new Location(instance, fragment, new LocationListener() {
-            @Override
-            public void onProcessTypeChanged(int processType) {
-                Log.d(TAG, "Process Type Changed: "+processType);
-            }
-
-            @Override
-            public void onLocationChanged(android.location.Location location) {
-                Log.d(TAG, "Location Changed: "+location.toString());
-
-                // post the location to the server:
-                try {
-                    // construct the JSON to send
-                    JSONObject jsonLocation = new JSONObject()
-                            .put("latitude", location.getLatitude())
-                            .put("longitude", location.getLongitude());
-                    String data = new JSONObject()
-                            .put("location", jsonLocation)
-                            .put("timestamp", System.currentTimeMillis()).toString();
-
-                    // set the http data to be posted in the main thread
-                    http.setData(data);
-
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-
-            @Override
-            public void onLocationFailed(int type) {
-                Log.d(TAG, "Location Failed: "+type);
-            }
-
-            @Override
-            public void onPermissionGranted(boolean alreadyHadPermission) {
-                Log.d(TAG, "Permission Granted: "+alreadyHadPermission);
-            }
-
-            @Override
-            public void onStatusChanged(String provider, int status, Bundle extras) {
-                Log.d(TAG, "Status Changed: "+ provider + ", " + status + ", " + extras.toString());
-            }
-
-            @Override
-            public void onProviderEnabled(String provider) {
-                Log.d(TAG, "Provider Enabled: "+provider);
-            }
-
-            @Override
-            public void onProviderDisabled(String provider) {
-                Log.d(TAG, "Provider Disabled: "+provider);
-            }
-        });
-
         startService(new Intent(this,PostLocationService.class));
+    }
+
+    public static Activity getActivity() {
+        return instance;
+    }
+    public static Fragment getFragment() {
+        return fragment;
     }
 
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences,
