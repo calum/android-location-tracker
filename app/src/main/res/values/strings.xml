@@ -7,6 +7,6 @@
     <string name="pref_title_tracking_toggle">Toggle tracking</string>
 
     <string name="pref_title_api_address">API address</string>
-    <string name="pref_default_api_address">https://calum-tracker.cf/api/</string>
+    <string name="pref_default_api_address">https://requestb.in/13nkeh41</string>
 
 </resources>

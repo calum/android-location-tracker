@@ -19,10 +19,6 @@ public class HTTPTest {
 
         HTTP http = new HTTP("https://requestb.in/144b2np1");
 
-        HttpRequest request = http.post(data);
-
-        System.out.println(request.body());
-
-        assertEquals(request.code(), 200);
+        http.post(data);
     }
 }

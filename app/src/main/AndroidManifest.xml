@@ -14,7 +14,8 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/PreferenceFixTheme.Light.NoActionBar"
+        android:name="com.example.calum.tracker.TrackerApplication">
         <activity
             android:name="com.example.calum.tracker.SettingsActivity"
             android:label="@string/app_name">
@@ -24,6 +25,23 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <service
+            android:name="com.example.calum.location.PostLocationService"
+            android:enabled="true">
+        </service>
+
+        <receiver
+            android:name="com.example.calum.location.RestartService"
+            android:enabled="true"
+            android:exported="true"
+            android:label="RestartServiceWhenStopped"
+            android:permission="android.permission.RECEIVE_BOOT_COMPLETED">
+            <intent-filter>
+                <action android:name="RestartService" />
+            </intent-filter>
+        </receiver>
+
     </application>
 
 </manifest>
