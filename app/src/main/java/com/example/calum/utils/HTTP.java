@@ -37,7 +37,7 @@ public class HTTP {
         protected String doInBackground(String... data) {
             Log.d(TAG, "Posting data: " +data[0]);
 
-            HttpRequest request = HttpRequest.post(url);
+            HttpRequest request = HttpRequest.post(url).contentType("application/json");
             request.header("User-Agent", "Tracker App");
 
             //Accept all certificates
@@ -45,9 +45,13 @@ public class HTTP {
             //Accept all hostnames
             request.trustAllHosts();
 
-            request.send(data[0]);
-
-            return request.body();
+            try {
+                request.send(data[0]);
+                return request.body();
+            } catch (RuntimeException e) {
+                Log.w(TAG, "Connection Errored");
+            }
+            return null;
         }
 
         protected void onPostExecute(String result) {
